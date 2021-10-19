@@ -1,0 +1,47 @@
+---
+title: "ADA-midterm"
+author: "Jane Shi"
+date: "10/18/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#import the data
+```{r, echo=FALSE, eval=FALSE}
+library(readr)
+library(tidyverse)
+library(haven)
+
+BRFSS2017<-read_csv("https://raw.githubusercontent.com/kijohnson/ADA-Fall-2021/master/BRFSS2017_10percent_v.csv")
+
+#recode sex
+BRFSS2017$SEX<-factor(BRFSS2017$SEX, 
+                      levels = c(1, 2), 
+                      labels = c("Male", "Female"))
+table(BRFSS2017$SEX)
+```
+
+#determine median heights for each sex
+```{r}
+median_maleH <-median(BRFSS2017$ht_meters[BRFSS2017$SEX=="Male"],na.rm=TRUE)
+median_femaleH <-median(BRFSS2017$ht_meters[BRFSS2017$SEX=="Female"],na.rm=TRUE)
+median_maleH
+median_femaleH
+
+```
+#make a plot to examine median differences in height by sex
+```{r}
+library(ggplot2)
+ggplot(na.omit(BRFSS2017), aes(x = SEX, y = ht_meters)) +
+  geom_boxplot() +
+  labs(x = "Sex", y = "Heights",  title = "Boxplot")
+```
+#exporting the plot
+```{r}
+ggsave(filename = "height boxplot.png",
+       width = 4, height = 4, units = "in", bg="white")
+```
+
