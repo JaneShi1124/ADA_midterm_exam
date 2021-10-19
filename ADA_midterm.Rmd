@@ -44,4 +44,11 @@ ggplot(na.omit(BRFSS2017), aes(x = SEX, y = ht_meters)) +
 ggsave(filename = "height boxplot.png",
        width = 4, height = 4, units = "in", bg="white")
 ```
-
+#determine the mean height in females and males
+```{r}
+mean_maleH <-mean(BRFSS2017$ht_meters[BRFSS2017$SEX=="Male"],na.rm=TRUE)
+mean_femaleH <-mean(BRFSS2017$ht_meters[BRFSS2017$SEX=="Female"],na.rm=TRUE)
+mean_maleH
+mean_femaleH
+```
+# mean_maleH: 1.781511; mean_femaleH: 1.631513
