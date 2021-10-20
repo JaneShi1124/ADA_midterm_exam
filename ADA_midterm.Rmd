@@ -37,7 +37,8 @@ median_femaleH
 library(ggplot2)
 ggplot(na.omit(BRFSS2017), aes(x = SEX, y = ht_meters)) +
   geom_boxplot() +
-  labs(x = "Sex", y = "Heights",  title = "Boxplot")
+  labs(x = "Sex", y = "Heights",  title = "Boxplot")+
+  stat_summary(fun.y=median, geom="point", shape=2, color="blue") #add median
 ```
 #exporting the plot
 ```{r}
